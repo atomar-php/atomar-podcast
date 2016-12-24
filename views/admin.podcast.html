@@ -1,0 +1,45 @@
+{% extends "admin/_base.html" %}
+{% block title %}Podcast{% endblock %}
+
+{% block content %}
+<div class="page-header clearfix">
+  <h2 class="pull-left">Podcast</h2>
+  <div class="pull-right">
+  	<a class="btn btn-primary" data-lightbox="/admin/podcast/new" ><span class="glyphicon glyphicon-plus-sign"></span> Add Podcast Feed</a>
+  </div>
+</div>
+{% if feeds|length > 0 %}
+<p>Below are all of your podcast feeds. You can edit feed details and add episodes individually.</p>
+<table id="podcast-table" class="table table-bordered table-hover">
+	<tr>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Episodes</th>
+		<th></th>
+	</tr>
+	{% for f in feeds %}
+	{% if f.is_enabled == '0' %}
+	<tr class="disabled text-muted">
+	{% else %}
+	<tr>
+	{% endif %}
+		<td><a href="/admin/podcast/{{ f.id }}/">{{ f.title }}</a></td>
+		<td>{{ f.description }}</td>
+		<td class="text-center">{{ f.ownPodcastepisode|length }}</td>
+		<td>
+			<div class="controls">
+				<a data-lightbox="/admin/podcast/{{ f.id }}/edit/"><span class="glyphicon glyphicon-edit tip" data-toggle="tooltip" title="edit"></span></a>
+		        {% if f.is_enabled %}
+		        <a href="/!/podcast/enable_podcast?id={{ f.id }}&amp;enabled=0&amp;r=/admin/podcast"><span class="glyphicon glyphicon-thumbs-down tip" data-toggle="tooltip" title="disable"></span></a>
+		        {% else %}
+		        <a href="/!/podcast/enable_podcast?id={{ f.id }}&amp;enabled=1&amp;r=/admin/podcast"><span class="glyphicon glyphicon-thumbs-up tip" data-toggle="tooltip" title="enable"></span></a>
+		        {% endif %}
+			</div>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p class="well">You need to create at least one podcast feed before you can begin uploading episodes.</p>
+{% endif %}
+{% endblock %}

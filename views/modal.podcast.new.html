@@ -1,0 +1,16 @@
+{% extends "_lightbox.html" %}
+
+{% block lightbox %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label for="field-title">Title <span class="text-danger">*</span></label>
+      <input type="text" id="field-title" class="form-control" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="field-description">Description <span class="text-danger">*</span></label>
+      <textarea name="description" id="field-description" class="form-control" cols="30" rows="5" required></textarea>
+    </div>
+  </div>
+</div>
+{% endblock %}

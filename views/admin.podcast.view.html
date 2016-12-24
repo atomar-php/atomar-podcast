@@ -1,0 +1,49 @@
+{% extends "admin/_base.html" %}
+{% block title %}Podcast{% endblock %}
+
+{% block content %}
+<div class="page-header clearfix">
+  <h2 class="pull-left">Podcast <small>{{ podcast.title }}</small></h2>
+  <div class="pull-right">
+  	<a href="/admin/podcast/" class="btn btn-default">Back to Overview</a>
+  	<a href="/!/podcast/feed/?id={{ podcast.id }}" target="new" class="btn btn-default"><span class="glyphicon glyphicon-list"></span> View Raw Feed</a>
+  	<a class="btn btn-primary" data-lightbox="/admin/podcast/{{ podcast.id }}/new_episode/" ><span class="glyphicon glyphicon-plus-sign"></span> Create Episode</a>
+  </div>
+</div>
+{% if podcast.ownPodcastepisode|length > 0 %}
+<p>Below are all the episodes in this podcast.</p>
+<table id="episode-table" class="table table-bordered table-hover">
+	<tr>
+		<th>File</th>
+		<th>Details</th>
+		<th></th>
+	</tr>
+	{% for p in podcast.ownPodcastepisode %}
+	{% if p.is_enabled == '0' %}
+	<tr class="disabled text-muted">
+	{% else %}
+	<tr>
+	{% endif %}
+		<td>
+		{% if p.is_enabled %}
+			<a href="{{ sys.site_url }}!/podcast/episode/{{ p.id }}.mp3">Download</a>
+		{% endif %}
+		</td>
+		<td><strong>{{ p.title }}</strong> <span class="text-muted">{{ simple_date(p.recorded_at) }}</span><p>{{ p.artist }}</p></td>
+		<td>
+			<div class="controls">
+				<a data-lightbox="/admin/podcast/episode/{{ p.id }}/edit/"><span class="glyphicon glyphicon-edit tip" data-toggle="tooltip" title="edit"></span></a>
+		        {% if p.is_enabled %}
+		        <a href="/!/podcast/enable_episode?id={{ p.id }}&amp;enabled=0"><span class="glyphicon glyphicon-thumbs-down tip" data-toggle="tooltip" title="disable"></span></a>
+		        {% else %}
+		        <a href="/!/podcast/enable_episode?id={{ p.id }}&amp;enabled=1"><span class="glyphicon glyphicon-thumbs-up tip" data-toggle="tooltip" title="enable"></span></a>
+		        {% endif %}
+			</div>
+		</td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}
+<p class="well">There are no episodes in this podcast yet.</p>
+{% endif %}
+{% endblock %}

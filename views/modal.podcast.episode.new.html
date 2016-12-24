@@ -1,0 +1,28 @@
+{% extends "_lightbox.html" %}
+
+{% block lightbox %}
+<div class="row">
+  <div class="col-xs-12">
+    <label for="field-date">Record Date (optional)</label>
+    <div class="input-group" id="date">
+      <input type="text" id="field-date" class="form-control" name="date">
+      <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label>Audio File <span class="text-danger">*</span></label>
+      <input type="hidden" id="file-id" name="file_id" required>
+      <div id="dropzone"></div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="form-group">
+      <label for="field-description">Notes (optional)</label>
+      <textarea name="description" id="field-description" class="form-control" cols="30" rows="5"></textarea>
+    </div>
+  </div>
+</div>
+{% endblock %}

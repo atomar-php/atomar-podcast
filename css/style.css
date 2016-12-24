@@ -1,0 +1,22 @@
+#podcast-table tr td:nth-child(4),
+#episode-table tr td:nth-child(3) {
+	width:50px;
+}
+#podcast-table tr td:nth-child(3) {
+	width:80px;
+}
+#podcast-table tr .controls,
+#episode-table tr .controls  {
+	visibility:hidden;
+}
+#podcast-table tr:hover .controls,
+#episode-table tr:hover .controls  {
+	visibility:inherit;
+}
+#podcast-table tr.disabled,
+#episode-table tr.disabled  {
+	text-decoration: line-through;
+}
+#episode-table tr td:nth-child(1) {
+	width:400px;
+}

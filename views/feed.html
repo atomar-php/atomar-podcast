@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <atom:link href="{{sys.site_url}}{{feed_url}}" rel="self" type="application/rss+xml" />
+    <title>{{podcast.title}}</title>
+    <description>{{podcast.description}}</description>
+    <link>{{site_url}}</link>
+    <language>en-us</language>
+    <copyright>Copyright {{year}}</copyright>
+    <lastBuildDate>{{ build_date }}</lastBuildDate>
+    <pubDate>{{ build_date }}</pubDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <webMaster>{{owner_email}} (Web Master)</webMaster>
+
+    <itunes:author>{{ sys.site_name}}</itunes:author>
+    <itunes:summary>{{podcast.description}}</itunes:summary>
+
+    <itunes:owner>
+      <itunes:name>{{owner_name}}</itunes:name>
+      <itunes:email>{{owner_email}}</itunes:email>
+    </itunes:owner>
+
+    <itunes:explicit>No</itunes:explicit>
+
+    <itunes:image href="http://faithbaptist.com/includes/extensions/faith_baptist/img/podcast.png"/>
+    
+    <itunes:category text="Religion &amp; Spirituality">
+      <itunes:category text="Christianity"/>
+    </itunes:category>
+    
+    {% for p in podcast.ownPodcastepisode %}
+    <item>
+      <title>{{ p.title }}</title>
+      <link>{{ sys.site_url }}!/podcast/episode/{{ p.id }}.mp3</link>
+      <guid>{{ sys.site_url }}!/podcast/episode/{{ p.id }}.mp3</guid>
+      <description>{{ p.description }}</description>
+      <enclosure url="{{ sys.site_url }}!/podcast/episode/{{ p.id }}.mp3" length="{{ p.length }}" type="audio/mpeg"/>
+      <category>Podcasts</category>
+      <pubDate>{{ podcast_date(p.recorded_at) }}</pubDate>
+      <itunes:author>{{ p.artist }}</itunes:author>
+      <itunes:explicit>No</itunes:explicit>
+      <itunes:subtitle>{{ p.description }}</itunes:subtitle>
+      <itunes:summary>{{ p.description }}</itunes:summary>
+      <itunes:duration>{{ p.duration_sec }}</itunes:duration>
+      <itunes:keywords>{{ sys.site_name }}, podcast</itunes:keywords>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

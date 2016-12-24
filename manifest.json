@@ -1,0 +1,9 @@
+{
+  "name": "Podcast",
+  "description": "This extension provides the ability to generate a podcast feed. It provides a simple API for manipulating the podcast feed in addition to providing an administrative backend for manually adding episodes",
+  "version": "2.0",
+  "core": "5.x",
+  "dependencies": [
+    "file_drop"
+  ]
+}
